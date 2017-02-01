@@ -13,7 +13,8 @@ var Schema = mongoose.Schema;
 
 var searchSchema = new Schema ({
   searchID: Number,
-  searchString: String
+  searchString: String,
+  searchTime: String
 });
 
 var searchHistory = mongoose.model('searchHistory', searchSchema);
@@ -35,9 +36,11 @@ app.get('/api/imagesearch/:value', function(req, res) {
     else {
       var code = c+1
     }
+    var timestamp = new Date();
     var addSearch = searchHistory({
       searchID: code,
-      searchString: string
+      searchString: string,
+      searchTime: timestamp
     });
     addSearch.save(function(err) {
       if (err) throw err;
@@ -72,8 +75,37 @@ app.get('/api/imagesearch/:value', function(req, res) {
 
 });
 
-app.get('/api/imagesearch/latest', function(req, res) {
-  // CONNECT TO DB and FETCH LAST 10 QUERIES
+app.get('/api/latest', function(req, res) {
+  var searchList = [];
+  searchHistory.count({}, function(err, c) {
+    console.log(c);
+    var counter = 0;
+    searchHistory.find({}, function(err, data) {
+      for (var i=data.length-1; i>=0 && i>= data.length-10; i--) {
+        console.log(data[i]);
+        searchList.push({});
+        searchList[counter].SearchQuery = data[i].searchString;
+        searchList[counter].When = data[i].searchTime;
+        counter++;
+      }
+      res.json(searchList)
+    })
+    /*
+    if (c<11) {
+      for (i=1; i<=c; i++) {
+        searchList.push({});
+        searchList[i-1].test = 'success'
+      }
+    }
+    else {
+      for (i=c-9; i<=c; i++) {
+        searchList.push({});
+        searchList[i-c-9].test = 'success'
+      }
+    }
+    console.log(searchList);
+    */
+  })
 })
 
 app.listen(port);
