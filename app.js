@@ -2,32 +2,28 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var request = require('request');
-var fs = require('fs');
 var mongoose = require('mongoose');
 app.use(require('express-favicon-short-circuit'));
 var port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://dbuser:userpwd@ds139909.mlab.com:39909/ekaraca-imagesearch');
-
 var Schema = mongoose.Schema;
-
 var searchSchema = new Schema ({
   searchID: Number,
   searchString: String,
   searchTime: String
 });
-
 var searchHistory = mongoose.model('searchHistory', searchSchema);
 
-
-app.get('/', function(req, resp) {
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+// IMAGE SEARCH FUNCTIONALITY
 app.get('/api/imagesearch/:value', function(req, res) {
   var string = req.params.value;
 
-  // STORE STRING IN DB WITH SEARCH ID
+  // Store Search query, search id and timestamp in DB
   searchHistory.count({}, function(err, c) {
     console.log('count is: ' + c);
     if (c==0) {
@@ -47,6 +43,8 @@ app.get('/api/imagesearch/:value', function(req, res) {
       console.log(string + ' was saved \nThe search ID is: ' + code)
     })
   })
+
+  // Perform Search (and request specific page, if needed) and return results
   console.log('string: ' + string);
   var page = req.query.page || 1;
   console.log(page);
@@ -71,12 +69,13 @@ app.get('/api/imagesearch/:value', function(req, res) {
       //res.end(returnObj);
     }
   })
-
-
 });
 
-app.get('/api/latest', function(req, res) {
+// LATEST SEARCHES FUNCTIONLITY
+app.get('/api/latestsearches', function(req, res) {
   var searchList = [];
+
+  // Retrieve and display the last 10 searches
   searchHistory.count({}, function(err, c) {
     console.log(c);
     var counter = 0;
@@ -90,31 +89,7 @@ app.get('/api/latest', function(req, res) {
       }
       res.json(searchList)
     })
-    /*
-    if (c<11) {
-      for (i=1; i<=c; i++) {
-        searchList.push({});
-        searchList[i-1].test = 'success'
-      }
-    }
-    else {
-      for (i=c-9; i<=c; i++) {
-        searchList.push({});
-        searchList[i-c-9].test = 'success'
-      }
-    }
-    console.log(searchList);
-    */
   })
 })
 
 app.listen(port);
-
-/*
-ToDo's:
-- convert Google Response to JSON, filter info and stream back to res
-- filter categories: image url, alt text, image page url
-- include pagination option (add ?offset=2)
-
-
-*/

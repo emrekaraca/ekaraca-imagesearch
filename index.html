@@ -1,1 +1,90 @@
-Hello, welcome to the image search!
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Image Search API</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="header">
+                API Basejump: Image Seach API
+            </h1>
+            <blockquote>
+                User stories:
+                <ul>1) I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</ul>
+                <ul>2) I can paginate through the responses by adding a ?page=2 parameter to the URL.</ul>
+                <ul>3) I can get a list of the most recently submitted search strings.</ul>
+            </blockquote>
+            <h3>Example usage:</h3>
+            <ul>1) <code>URL/api/imagesearch/cars</code><br></ul>
+            <ul>2) <code>URL/api/imagesearch/cars?page=2</code><br></ul>
+            <ul>3) <code>URL/api/latestsearches</code></ul>
+            <h3>Example output:</h3>
+            <code>
+              [
+              {
+              link: "https://i.ytimg.com/vi/UReY2dMk1rs/maxresdefault.jpg",
+              title: "Final Races to Cars Lightning McQueen | Cars Fast as Lightning ...",
+              context: "https://www.youtube.com/watch?v=UReY2dMk1rs",
+              thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOphKMtHnzZZVeeuAvgBcDyDHV6BDwuaMUyGP6cWFySaZmtvgnjtuu9NOC"
+              },
+              {
+              link: "http://www.chevrolet.com/content/dam/Chevrolet/northamerica/usa/nscwebsite/en/Home/Tools/SEO_Segments/Cars/01_images/2016-bb-chevrolet-cars-seo-masthead-1480x551.jpg",
+              title: "Cars: Coupes, Sedans - Hatchbacks | Chevrolet",
+              context: "http://www.chevrolet.com/car.html",
+              thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQuy09igT05GgU4Yy8-0XZe8TttcF9KxJS-Z4WFG4TZsb4-CAfZ_KT56Ih"
+              },
+              {
+              link: "https://i.ytimg.com/vi/6oIMx-54ps8/maxresdefault.jpg",
+              title: "CARS : SpiderMan drive a BLACK MCQUEEN CARS! Spider Nursery Rhymes ...",
+              context: "https://www.youtube.com/watch?v=6oIMx-54ps8",
+              thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrrspI7Vko4ToVxBHQPkbxYiSkErzatXDNocA3kkBNNGVANLd53bwQD1A"
+              },
+              {
+              link: "http://rcysl.com/wp-content/uploads/2016/12/Collection-of-Cars.jpg",
+              title: "Cars Collection For Free Download",
+              context: "http://rcysl.com/a-f/cars.html",
+              thumbnail: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQNH7puZFvhBh3NH4WNsgnWaHU8qRrg8__kZrTgHLtfA853qqZKgiCssTIr"
+              },
+              {
+              link: "https://i.ytimg.com/vi/cJDFpLptJyg/maxresdefault.jpg",
+              title: "Disney Pixar Cars Lighnting McQueen dreams helping Sally Batman ...",
+              context: "https://www.youtube.com/watch?v=cJDFpLptJyg",
+              thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2TiPpN5ezekrzOCM-ZF7rDvoqB9bdRpbbJo66eiwneeus-ck9a8j6b0"
+              },
+              {
+              link: "http://www.gannett-cdn.com/-mm-/5b468fa82603c5eab837b761f2be29af402d4814/c=657-0-2574-1441&r=x408&c=540x405/local/-/media/2016/05/26/USATODAY/USATODAY/635998721197925373-Carsoriginal.jpg",
+              title: "Sneak peek: 'Cars 3' zooms ahead with new character Cruz Ramirez",
+              context: "http://www.usatoday.com/story/life/movies/2016/05/30/sneak-peek-exclusive-cars-3-new-character-cruz-ramirez/84981778/",
+              thumbnail: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS62gE6RnPjsPg8IbbuR13KcXcfkk_FA1EXJ4F7fP9RYzTITX-XbcADocE"
+              },
+              {
+              link: "https://i.ytimg.com/vi/rab8v7NmvUY/maxresdefault.jpg",
+              title: "Sports Car | Racing Cars | Compilation | Cars for Kids | Videos ...",
+              context: "https://www.youtube.com/watch?v=rab8v7NmvUY",
+              thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHYZ-SHikZwAwlrQMwZc_-R1XBhEMhFbIJFUrz8di3r9nS9yho9pjiw92H"
+              },
+              {
+              link: "http://wallpaperswide.com/download/lightning_mcqueen_cars_movie-wallpaper-1920x1200.jpg",
+              title: "WallpapersWide.com | Cars HD Desktop Wallpapers for Widescreen ...",
+              context: "http://wallpaperswide.com/cars-desktop-wallpapers.html",
+              thumbnail: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTBrhBy0oX1z3eBnLCc13oQLGKctyFbkSIFHt8XgW5fKx01bZySoqFF4IE"
+              },
+              {
+              link: "http://st.motortrend.com/uploads/sites/10/2015/11/2016-audi-a7-premium-plus-hatchback-angular-front.png",
+              title: "Audi Cars, Convertible, Coupe, Hatchback, Sedan, SUV/Crossover ...",
+              context: "http://www.motortrend.com/cars/audi/",
+              thumbnail: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRKMkQ71tg9EiVndvMxjgB66nAOaSOdIUQPp_0o-B16ex_PBwn7Zid-bCA"
+              },
+              {
+              link: "http://www.fansshare.com/images/carwallpapers/computer-cargirl-view-large-girls-black-car-cars-wallpaper-1151356469.jpg",
+              title: "Car wallpapers large - Car Pictures",
+              context: "http://carpictures2016.blogspot.com/2015/12/car-wallpapers-large.html",
+              thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwo_ig_JYIgA6GJCWDJuP6JUyhke-QbioZZ7pwTFTaDbQNkt-b3WU-ug"
+              }
+              ]
+            </code>
+        </div>
+    </body>
+</html>
